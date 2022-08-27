@@ -211,6 +211,9 @@ PyGccDeclaration_get_location(struct PyGccTree *self, void *closure)
             add_simple_getter('pointer',
                               'PyGccPointerType_New(gcc_type_get_pointer(PyGccTree_as_gcc_type(self)))',
                               "The gcc.PointerType representing '(this_type *)'")
+            add_simple_getter('alignmentof',
+                              'PyGccInt_FromLong(TYPE_ALIGN(PyGccTree_as_gcc_type(self).inner) / 8)',
+                              "The alignment in bytes of this type")
             getsettable.add_gsdef('attributes',
                                   'PyGccType_get_attributes',
                                   None,
