@@ -163,6 +163,12 @@ gcc_mem_ref_get_operand(gcc_mem_ref node)
   return gcc_private_make_tree (TREE_OPERAND (node.inner, 0));
 }
 
+GCC_IMPLEMENT_PUBLIC_API(gcc_tree)
+gcc_mem_ref_get_offset(gcc_mem_ref node)
+{
+  return gcc_private_make_tree (TREE_OPERAND (node.inner, 1));
+}
+
 /***************************************************************************
  gcc_ssa_name
  **************************************************************************/

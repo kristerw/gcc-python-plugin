@@ -218,6 +218,7 @@
   -->
   <type name="mem_ref" base="reference">
     <attribute name="operand" kind="tree"/>
+    <attribute name="offset" kind="tree"/>
   </type>
   <!--
   ..            MemberRef
