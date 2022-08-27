@@ -75,6 +75,7 @@
       <doc>The precision of this type in bits (e.g. 32)</doc>
     </attribute>
     <attribute name="is_unsigned" kind="bool"/>
+    <attribute name="overflow_wraps" kind="bool"/>
 
   </type>
 

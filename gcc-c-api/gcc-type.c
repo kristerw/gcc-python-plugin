@@ -135,6 +135,12 @@ gcc_integer_type_is_unsigned(gcc_integer_type node)
   return TYPE_UNSIGNED (node.inner);
 }
 
+GCC_IMPLEMENT_PUBLIC_API(bool)
+gcc_integer_type_get_overflow_wraps(gcc_integer_type node)
+{
+  return TYPE_OVERFLOW_WRAPS (node.inner);
+}
+
 /* gcc_integer_type */
   GCC_IMPLEMENT_PRIVATE_API (gcc_integer_constant)
 gcc_private_make_integer_constant (tree inner)

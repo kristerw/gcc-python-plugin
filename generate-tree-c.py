@@ -407,6 +407,9 @@ def generate_tree_code_classes():
                               "Boolean: does this type have the 'const' modifier?")
 
         if tree_type.SYM == 'INTEGER_TYPE':
+            add_simple_getter('overflow_wraps',
+                              'PyBool_FromLong(gcc_integer_type_get_overflow_wraps(PyGccTree_as_gcc_integer_type(self)))',
+                              "Boolean: True if overflow wraps around for the given integral type.")
             add_simple_getter('unsigned',
                               'PyBool_FromLong(gcc_integer_type_is_unsigned(PyGccTree_as_gcc_integer_type(self)))',
                               "Boolean: True for 'unsigned', False for 'signed'")
