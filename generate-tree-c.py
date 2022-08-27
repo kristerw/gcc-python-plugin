@@ -467,6 +467,11 @@ def generate_tree_code_classes():
                               "The gcc.FieldDecl for the field within the target'")
             tp_repr = '(reprfunc)PyGccComponentRef_repr'
 
+        if tree_type.SYM == 'VIEW_CONVERT_EXPR':
+            add_simple_getter('operand',
+                              'PyGccTree_New(gcc_private_make_tree(TREE_OPERAND(self->t.inner, 0)))',
+                              "The operand of this expression, as a gcc.Tree")
+
         if tree_type.SYM == 'MEM_REF':
             add_simple_getter('operand',
                               'PyGccTree_New(gcc_mem_ref_get_operand(PyGccTree_as_gcc_mem_ref(self)))',

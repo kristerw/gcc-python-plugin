@@ -226,8 +226,11 @@
   ..            ScopeRef
   ..            TargetMemRef
   ..            UnconstrainedArrayRef
-  ..            ViewConvertExpr
 -->
+
+  <type name="view_convert_expr" base="tree">
+    <attribute name="operand" kind="tree"/>
+  </type>
 
   <type name="ssa_name" base="tree">
     <attribute name="var" kind="tree"/>
