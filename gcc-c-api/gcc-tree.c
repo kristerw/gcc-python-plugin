@@ -154,6 +154,27 @@ gcc_component_ref_get_field(gcc_component_ref node)
   return gcc_private_make_tree (TREE_OPERAND (node.inner, 1));
 }
 
+GCC_IMPLEMENT_PUBLIC_API(int)
+gcc_component_ref_get_offset(gcc_component_ref node)
+{
+  int offset = tree_to_shwi(component_ref_field_offset (node.inner));
+  /* The offset may not point directly on the field if the structure is
+   * aligned with stricter alignment than the fields type.  So we need
+   * to add bytes included in the bit offset too, even if this is not
+   * a bit field.  */
+  tree field = TREE_OPERAND (node.inner, 1);
+  int bit_offset = tree_to_shwi(DECL_FIELD_BIT_OFFSET (field));
+
+  return offset + bit_offset / 8;
+}
+
+GCC_IMPLEMENT_PUBLIC_API(int)
+gcc_component_ref_get_bitoffset(gcc_component_ref node)
+{
+  tree field = TREE_OPERAND (node.inner, 1);
+  return tree_to_shwi(DECL_FIELD_BIT_OFFSET (field)) & 7;
+}
+
 /***************************************************************************
  gcc_mem_ref
  **************************************************************************/

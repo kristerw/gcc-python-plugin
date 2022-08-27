@@ -211,6 +211,8 @@
   <type name="component_ref" base="reference">
     <attribute name="target" kind="tree"/>
     <attribute name="field" kind="tree"/>
+    <attribute name="offset" kind="int"/>
+    <attribute name="bitoffset" kind="int"/>
   </type>
   <!--
   ..            ImagpartExpr

@@ -465,6 +465,12 @@ def generate_tree_code_classes():
             add_simple_getter('field',
                               'PyGccTree_New(gcc_component_ref_get_field(PyGccTree_as_gcc_component_ref(self)))',
                               "The gcc.FieldDecl for the field within the target'")
+            add_simple_getter('offset',
+                              'PyGccInt_FromLong(gcc_component_ref_get_offset(PyGccTree_as_gcc_component_ref(self)))',
+                              "The offset for the field within the target'")
+            add_simple_getter('bitoffset',
+                              'PyGccInt_FromLong(gcc_component_ref_get_bitoffset(PyGccTree_as_gcc_component_ref(self)))',
+                              "The bit offset for the field within the target'")
             tp_repr = '(reprfunc)PyGccComponentRef_repr'
 
         if tree_type.SYM == 'VIEW_CONVERT_EXPR':
