@@ -410,6 +410,30 @@ PyGccCfg_get_basic_blocks(PyGccCfg *self, void *closure)
                     add_block_to_list)
 }
 
+PyObject *
+PyGccCfg_get_inverted_post_order(PyGccCfg *self, void *closure)
+{
+    PyObject *result;
+    result = PyList_New(0);
+    if (!result) {
+        return NULL;
+    }
+
+    auto_vec<int, 20> postorder;
+    inverted_post_order_compute (&postorder);
+    for (int i = 0; i < self->cfg.inner->x_n_basic_blocks; i++) {
+        basic_block bb = GCC_COMPAT_VEC_INDEX (basic_block,
+                                               self->cfg.inner->x_basic_block_info,
+                                               postorder[i]);
+        if (add_block_to_list (gcc_private_make_cfg_block (bb), result)) {
+            Py_DECREF(result);
+            return NULL;
+	}
+    }
+
+    return result;
+}
+
 extern PyTypeObject PyGccLabelDecl_TypeObj;
 
 PyObject *
