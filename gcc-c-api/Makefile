@@ -108,7 +108,7 @@ install: $(LIBGCC_C_API_SO)
 	cp libgcc-c-api.so $(DESTDIR)$(GCCPLUGINS_DIR)
 
 # The python interpreter to use:
-PYTHON=python
+PYTHON=python3
 
 $(GENERATED_HEADERS): $(SOURCE_XML) xml-to-h.py xmltypes.py
 	$(PYTHON) $(srcdir)./xml-to-h.py $(xmldir)

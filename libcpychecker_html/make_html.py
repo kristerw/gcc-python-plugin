@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Make our data into HTML!
 These reports should be usable as email attachments, offline.
 This means we need to embed *all* our assets.

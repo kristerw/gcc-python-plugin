@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #   Copyright 2012 David Malcolm <dmalcolm@redhat.com>
 #   Copyright 2012 Red Hat, Inc.
 #

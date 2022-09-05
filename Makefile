@@ -90,12 +90,12 @@ GENERATOR_DEPS=cpybuilder.py wrapperbuilder.py print-gcc-version
 #    make  PYTHON=python3  PYTHON_CONFIG=python3-config  all
 
 # The python interpreter to use:
-PYTHON=python
+#PYTHON=python
 # The python-config executable to use:
-PYTHON_CONFIG=python-config
+#PYTHON_CONFIG=python-config
 
-#PYTHON=python3
-#PYTHON_CONFIG=python3-config
+PYTHON=python3
+PYTHON_CONFIG=python3-config
 
 #PYTHON=python-debug
 #PYTHON_CONFIG=python-debug-config
