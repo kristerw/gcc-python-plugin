@@ -243,27 +243,6 @@ install: $(PLUGIN_DSO) gcc-with-$(PLUGIN_NAME).1.gz
 	cp -a gccutils $(DESTDIR)$(GCCPLUGINS_DIR)/$(PLUGIN_DIR)
 	cp -a libcpychecker $(DESTDIR)$(GCCPLUGINS_DIR)/$(PLUGIN_DIR)
 
-	# Create "gcc-with-" support script:
-	mkdir -p $(DESTDIR)$(bindir)
-	install -m 755 gcc-with-python $(DESTDIR)/$(bindir)/gcc-with-$(PLUGIN_NAME)
-	# Fixup the reference to the plugin in that script, from being expressed as
-	# a DSO filename with a path (for a working copy) to a name of an installed
-	# plugin within GCC's search directory:
-	sed \
-	    -i \
-	    -e"s|-fplugin=[^ ]*|-fplugin=$(PLUGIN_NAME)|" \
-	    $(DESTDIR)$(bindir)/gcc-with-$(PLUGIN_NAME)
-
-        # Fixup the plugin name within -fplugin-arg-PLUGIN_NAME-script to match the
-	# name for this specific build:
-	sed \
-	   -i \
-	   -e"s|-fplugin-arg-python-script|-fplugin-arg-$(PLUGIN_NAME)-script|" \
-	   $(DESTDIR)$(bindir)/gcc-with-$(PLUGIN_NAME)
-
-	mkdir -p $(DESTDIR)$(mandir)/man1
-	cp gcc-with-$(PLUGIN_NAME).1.gz $(DESTDIR)$(mandir)/man1
-
 
 # Hint for debugging: add -v to the gcc options 
 # to get a command line for invoking individual subprocesses
