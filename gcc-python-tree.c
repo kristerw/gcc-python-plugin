@@ -754,8 +754,10 @@ PyGccRealCst_get_constant(struct PyGccTree * self, void *closure)
 
     d = TREE_REAL_CST_PTR(self->t.inner);
     real_to_decimal (buf, d, sizeof (buf), 0, 1);
-
-    str = PyGccString_FromString(buf);
+    if (!strcmp(buf, "+QNaN"))
+        str = PyGccString_FromString("nan");
+    else
+        str = PyGccString_FromString(buf);
     if (!str) {
         return NULL;
     }
