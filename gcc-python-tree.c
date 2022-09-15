@@ -712,7 +712,7 @@ PyGcc_int_from_int_cst(tree int_cst)
 #if (GCC_VERSION >= 5000)
     char buf[WIDE_INT_PRINT_BUFFER_SIZE];
     print_integer_cst_to_buf (int_cst, buf, type);
-    return PyGcc_int_from_decimal_string_buffer(buf);
+    return PyGcc_int_from_string_buffer(buf);
 #else
     return PyGcc_int_from_double_int(TREE_INT_CST(int_cst),
                                      TYPE_UNSIGNED(type));

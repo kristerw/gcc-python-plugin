@@ -343,7 +343,7 @@ PyObject *
 PyGcc_int_from_int_cst(tree int_cst);
 
 PyObject *
-PyGcc_int_from_decimal_string_buffer(const char *buf);
+PyGcc_int_from_string_buffer(const char *buf);
 
 void
 PyGcc_DoubleIntAsText(double_int di, bool is_unsigned,

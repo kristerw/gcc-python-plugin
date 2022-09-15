@@ -882,14 +882,17 @@ PyGccStringOrNone(const char *str_or_null)
 }
 
 PyObject *
-PyGcc_int_from_decimal_string_buffer(const char *buf)
+PyGcc_int_from_string_buffer(const char *buf)
 {
     PyObject *long_obj;
 #if PY_MAJOR_VERSION < 3
     long long_val;
     int overflow;
 #endif
-    long_obj = PyLong_FromString((char *)buf, NULL, 10);
+    int base = 10;
+    if (buf[0] == '0' && (buf[1] == 'x' || buf[1] == 'X'))
+        base = 16;
+    long_obj = PyLong_FromString((char *)buf, NULL, base);
     if (!long_obj) {
         return NULL;
     }
@@ -943,7 +946,7 @@ PyGcc_int_from_double_int(double_int di, bool is_unsigned)
 {
     char buf[512]; /* FIXME */
     PyGcc_DoubleIntAsText(di, is_unsigned, buf, sizeof(buf));
-    return PyGcc_int_from_decimal_string_buffer(buf);
+    return PyGcc_int_from_string_buffer(buf);
 }
 
 #endif /* #if (GCC_VERSION < 5000) */
