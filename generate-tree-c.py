@@ -527,6 +527,12 @@ def generate_tree_code_classes():
         if tree_type.SYM == 'CONSTRUCTOR':
             add_complex_getter('elements',
                               "The elements of this constructor, as a list of (index, gcc.Tree) pairs")
+            add_simple_getter('is_clobber',
+                              'PyBool_FromLong(TREE_CLOBBER_P(PyGccTree_as_gcc_type(self).inner))',
+                              "If this constructor is a clobber instruction")
+            add_simple_getter('no_clearing',
+                              'PyBool_FromLong(CONSTRUCTOR_NO_CLEARING(PyGccTree_as_gcc_type(self).inner))',
+                              "If absent values are treated as undefined")
 
         if tree_type.SYM == 'TRANSLATION_UNIT_DECL':
             add_simple_getter('block',
