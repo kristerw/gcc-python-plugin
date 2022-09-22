@@ -516,6 +516,14 @@ def generate_tree_code_classes():
                               "The name of this gcc.IdentifierNode, as a string")
             tp_repr = '(reprfunc)PyGccIdentifierNode_repr'
 
+        if tree_type.SYM == 'FIELD_DECL':
+            add_simple_getter('offset',
+                              'PyGccInt_FromLong(gcc_field_decl_get_offset(PyGccTree_as_gcc_field_decl(self)))',
+                              "The offset for the field within the target'")
+            add_simple_getter('bitoffset',
+                              'PyGccInt_FromLong(gcc_field_decl_get_bitoffset(PyGccTree_as_gcc_field_decl(self)))',
+                              "The bit offset for the field within the target'")
+
         if tree_type.SYM == 'VAR_DECL':
             add_simple_getter('initial',
                               'PyGccTree_New(gcc_constructor_as_gcc_tree(gcc_var_decl_get_initial(PyGccTree_as_gcc_var_decl(self))))',

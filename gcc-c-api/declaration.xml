@@ -37,6 +37,8 @@
   </type>
 
   <type name="field_decl" base="decl">
+    <attribute name="offset" kind="int"/>
+    <attribute name="bitoffset" kind="int"/>
   </type>
 
   <type name="function_decl" base="decl">

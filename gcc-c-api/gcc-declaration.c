@@ -185,6 +185,28 @@ gcc_translation_unit_decl_get_language (gcc_translation_unit_decl node)
  gcc_using_decl
  **************************************************************************/
 /***************************************************************************
+ gcc_field_decl
+ **************************************************************************/
+GCC_IMPLEMENT_PUBLIC_API(int)
+gcc_field_decl_get_offset(gcc_field_decl node)
+{
+  int offset = tree_to_shwi(DECL_FIELD_OFFSET (node.inner));
+  /* The offset may not point directly on the field if the structure is
+   * aligned with stricter alignment than the fields type.  So we need
+   * to add bytes included in the bit offset too, even if this is not
+   * a bit field.  */
+  int bit_offset = tree_to_shwi(DECL_FIELD_BIT_OFFSET (node.inner));
+
+  return offset + bit_offset / 8;
+}
+
+GCC_IMPLEMENT_PUBLIC_API(int)
+gcc_field_decl_get_bitoffset(gcc_field_decl node)
+{
+  return tree_to_shwi(DECL_FIELD_BIT_OFFSET (node.inner)) & 7;
+}
+
+/***************************************************************************
  gcc_var_decl
  **************************************************************************/
 GCC_IMPLEMENT_PUBLIC_API(gcc_constructor)
