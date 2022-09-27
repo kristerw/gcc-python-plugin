@@ -69,6 +69,12 @@ PyGccTree_get_addr(struct PyGccTree *self, void *closure)
     return PyLong_FromVoidPtr(self->t.inner);
 }
 
+static PyObject *
+PyGccTree_is_constant(struct PyGccTree *self, void *closure)
+{
+    return PyBool_FromLong(TREE_CONSTANT(self->t.inner));
+}
+
 """)
 
     getsettable = PyGetSetDefTable('PyGccTree_getset_table',
@@ -76,6 +82,8 @@ PyGccTree_get_addr(struct PyGccTree *self, void *closure)
                                                 'Instance of gcc.Tree giving the type of the node'),
                                     PyGetSetDef('addr', 'PyGccTree_get_addr', None,
                                                 'The address of the underlying GCC object in memory'),
+                                    PyGetSetDef('is_constant', 'PyGccTree_is_constant', None,
+                                                'Value of TREE_CONSTANT(NODE)'),
                                     PyGetSetDef('str_no_uid', 'PyGccTree_get_str_no_uid', None,
                                                 'A string representation of this object, like str(), but without including any internal UID')],
                                    identifier_prefix='PyGccTree',
