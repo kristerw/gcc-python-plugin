@@ -507,12 +507,12 @@ PyGccType_get_sizeof(struct PyGccTree *self, void *closure)
     /* Error handling: */
     str = PyGccTree_str(self);
     if (str) {
-        PyErr_Format(PyExc_TypeError,
+        PyErr_Format(PyExc_AttributeError,
                      "type \"%s\" does not have a \"sizeof\"",
                      PyGccString_AsString(str));
         Py_DECREF(str);
     } else {
-        PyErr_Format(PyExc_TypeError,
+        PyErr_Format(PyExc_AttributeError,
                      "type does not have a \"sizeof\"");
     }
     return NULL;
