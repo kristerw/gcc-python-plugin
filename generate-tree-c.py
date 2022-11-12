@@ -546,6 +546,9 @@ def generate_tree_code_classes():
             add_simple_getter('is_clobber',
                               'PyBool_FromLong(TREE_CLOBBER_P(PyGccTree_as_gcc_type(self).inner))',
                               "If this constructor is a clobber instruction")
+            add_simple_getter('is_clobber_eol',
+                              'PyBool_FromLong(TREE_CLOBBER_P(PyGccTree_as_gcc_type(self).inner) && CLOBBER_KIND (PyGccTree_as_gcc_type(self).inner) == CLOBBER_EOL)',
+                              "If this constructor is a clobber instruction of kind CLOBBER_EOL")
             add_simple_getter('no_clearing',
                               'PyBool_FromLong(CONSTRUCTOR_NO_CLEARING(PyGccTree_as_gcc_type(self).inner))',
                               "If absent values are treated as undefined")
