@@ -434,6 +434,30 @@ PyGccCfg_get_inverted_post_order(PyGccCfg *self, void *closure)
     return result;
 }
 
+PyObject *
+PyGccCfg_get_reverse_post_order(PyGccCfg *self, void *closure)
+{
+    PyObject *result;
+    result = PyList_New(0);
+    if (!result) {
+        return NULL;
+    }
+
+    int *postorder = XNEWVEC (int, self->cfg.inner->x_n_basic_blocks);
+    int nof_blocks = post_order_compute (postorder, true, true);
+    for (int i = nof_blocks - 1; i >= 0; --i) {
+        basic_block bb = GCC_COMPAT_VEC_INDEX (basic_block,
+                                               self->cfg.inner->x_basic_block_info,
+                                               postorder[i]);
+        if (add_block_to_list (gcc_private_make_cfg_block (bb), result)) {
+            Py_DECREF(result);
+            return NULL;
+	}
+    }
+
+    return result;
+}
+
 extern PyTypeObject PyGccLabelDecl_TypeObj;
 
 PyObject *
